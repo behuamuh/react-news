@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 
 export default Origin =>
   class ToggleAccordeon extends Component {
-    state = {
-      openedId: null,
-    };
+    constructor(props) {
+      super(props);
+      this.state = {
+        openedId: this.props.defaultOpenId,
+      };
+    }
 
     toggleOpen = id => () => {
       const { openedId } = this.state;

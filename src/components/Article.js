@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 import CommentsList from './CommentsList';
 
@@ -17,7 +18,15 @@ function Article({ article, isOpen, toggleOpen }) {
     <div>
       <h1>{article.title}</h1>
       <button onClick={toggleOpen}>{isOpen ? 'Close' : 'Open'}</button>
-      {getBody()}
+      <CSSTransitionGroup
+        transitionName="article"
+        transitionAppear={true}
+        transitionAppearTimeout={500}
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={300}
+      >
+        {getBody()}
+      </CSSTransitionGroup>
     </div>
   );
 }
@@ -27,7 +36,7 @@ Article.propTypes = {
     title: PropTypes.string.isRequired,
     text: PropTypes.string,
     comments: PropTypes.array,
-  })
-}
+  }),
+};
 
 export default Article;
