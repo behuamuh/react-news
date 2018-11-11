@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import Article from './Article';
 import accordeon from '../decorators/accordeon';
@@ -22,4 +23,4 @@ ArticleList.propTypes = {
   toggleOpen: PropTypes.func.isRequired,
 }
 
-export default accordeon(ArticleList);
+export default connect(state => ({articles: state.articles}))(accordeon(ArticleList));

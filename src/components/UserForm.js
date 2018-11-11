@@ -13,9 +13,9 @@ export default class UserForm extends Component {
 
   render() {
     return (
-      <div>
+      <p>
         Name: <input value={this.state.name} onChange={this.handleChange} />
-      </div>
+      </p>
     );
   }
 }

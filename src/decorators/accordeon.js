@@ -5,7 +5,7 @@ export default Origin =>
     constructor(props) {
       super(props);
       this.state = {
-        openedId: this.props.defaultOpenId,
+        openedId: null,
       };
     }
 
