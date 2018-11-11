@@ -2,6 +2,7 @@ import './App.css';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import ArticleList from './ArticleList';
 import UserForm from './UserForm';
@@ -9,6 +10,10 @@ import Filters from './Filters';
 import Counter from './Counter';
 
 class App extends Component {
+  static propTypes = {
+    articles: PropTypes.array,
+  };
+
   render() {
     return (
       <div className="App">

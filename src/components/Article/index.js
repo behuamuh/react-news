@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransitionGroup } from 'react-transition-group';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux';
 
 import CommentsList from '../CommentsList';
-import {deleteArticle} from '../../actions'
+import { deleteArticle } from '../../actions';
 import './style.css';
 
 function Article({ article, isOpen, toggleOpen, deleteArticle }) {
@@ -17,9 +17,8 @@ function Article({ article, isOpen, toggleOpen, deleteArticle }) {
     ) : null;
   }
 
-  function handleDelete(){
-    console.log('delete')
-    deleteArticle(article.id)
+  function handleDelete() {
+    deleteArticle(article.id);
   }
 
   return (
@@ -46,6 +45,12 @@ Article.propTypes = {
     text: PropTypes.string,
     comments: PropTypes.array,
   }),
+  isOpen: PropTypes.bool,
+  toggleOpen: PropTypes.func,
+  deleteArticle: PropTypes.func,
 };
 
-export default connect(null,{deleteArticle})(Article);
+export default connect(
+  null,
+  { deleteArticle }
+)(Article);

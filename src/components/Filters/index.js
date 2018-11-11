@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Select from 'react-select';
 import DayPicker, { DateUtils } from 'react-day-picker';
@@ -11,6 +12,10 @@ class Filters extends Component {
     selectedOption: null,
     from: null,
     to: null,
+  };
+
+  static propTypes = {
+    setFilters: PropTypes.func,
   };
 
   handleDayClick = day => {
