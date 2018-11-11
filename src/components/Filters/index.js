@@ -4,7 +4,7 @@ import Select from 'react-select';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import { connect } from 'react-redux';
-import {setFilters} from '../../actions'
+import { setFilters } from '../../actions';
 
 class Filters extends Component {
   state = {
@@ -16,25 +16,23 @@ class Filters extends Component {
   handleDayClick = day => {
     const range = DateUtils.addDayToRange(day, this.state);
     this.setState(range);
-    console.log(range)
-    const { from = null, to = null} = range;
-    this.props.setFilters({ from, to })
+    const { from = null, to = null } = range;
+    this.props.setFilters({ filters: { from, to } });
   };
 
   handleResetClick = () => {
-    this.props.setFilters({ from: null, to: null})
+    this.props.setFilters({ filters: { from: null, to: null } });
     this.setState({ from: null, to: null });
   };
 
   handleChange = selectedOption => {
-    this.props.setFilters({ selectedOption })
+    this.props.setFilters({ filters: { selectedOption } });
     this.setState({ selectedOption });
   };
 
   render() {
-    const { from, to } = this.state;
+    const { from, to, selectedOption } = this.state;
     const modifiers = { start: from, end: to };
-    const { selectedOption } = this.state;
     const options = this.props.articles.map(article => ({
       value: article.id,
       label: article.title,
@@ -72,6 +70,7 @@ class Filters extends Component {
   }
 }
 
-export default connect(({ articles }) => ({
-  articles,
-}), {setFilters})(Filters);
+export default connect(
+  null,
+  { setFilters }
+)(Filters);

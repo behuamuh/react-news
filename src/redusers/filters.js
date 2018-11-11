@@ -10,7 +10,7 @@ export default (
 ) => {
   switch (action.type) {
     case SET_FILTERS:
-      return action.filters;
+      return { ...filters, ...action.payload.filters };
     default:
       return filters;
   }

@@ -1,6 +1,7 @@
 import './App.css';
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import ArticleList from './ArticleList';
 import UserForm from './UserForm';
@@ -11,13 +12,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <Counter />
+        <Counter />
         <UserForm />
-        <Filters />
+        <Filters articles={this.props.articles} />
         <ArticleList />
       </div>
     );
   }
 }
 
-export default App;
+export default connect(state => ({ articles: state.articles }))(App);

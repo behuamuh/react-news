@@ -14,13 +14,9 @@ export function deleteArticle(id) {
   };
 }
 
-export function setFilters( {
-  selectedOption = null,
-  from = null,
-  to = null,
-}) {
+export function setFilters(filters) {
   return {
     type: SET_FILTERS,
-    payload: filters { se  },
+    payload: filters,
   };
 }
