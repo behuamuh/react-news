@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransitionGroup } from 'react-transition-group';
 
-import CommentsList from './CommentsList';
+import CommentsList from '../CommentsList';
+import './style.css';
 
 function Article({ article, isOpen, toggleOpen }) {
   function getBody() {

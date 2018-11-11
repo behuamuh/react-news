@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransitionGroup } from 'react-transition-group';
 
-import Comment from './Comment';
-import toggleOpen from '../decorators/toggleOpen';
-import FormComment from './FormComment';
-import FormAuthor from './FormAuthor';
+import Comment from '../Comment';
+import toggleOpen from '../../decorators/toggleOpen';
+import CommentForm from '../CommentForm';
+import './style.css'
 
 function CommentsList({ isOpen, toggleOpen, comments = [] }) {
   function getBody() {
@@ -24,8 +24,7 @@ function CommentsList({ isOpen, toggleOpen, comments = [] }) {
     return (
       <div>
         {list}
-        <FormAuthor min={5} max={10} />
-        <FormComment min={20} max={50} />
+        <CommentForm />
       </div>
     );
   }

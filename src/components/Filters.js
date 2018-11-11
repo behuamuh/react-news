@@ -28,12 +28,7 @@ export default class Filters extends Component {
   render() {
     const { from, to } = this.state;
     const modifiers = { start: from, end: to };
-    const { selectedOption } = this.state;
-    const selectedArticles = articles.filter(
-      article =>
-        !selectedOption ||
-        selectedOption.some(option => option.value === article.id)
-    );
+    const { selectedOption } = this.state;    
     const options = articles.map(article => ({
       value: article.id,
       label: article.title,
