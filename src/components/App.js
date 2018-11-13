@@ -26,4 +26,4 @@ class App extends Component {
   }
 }
 
-export default connect(state => ({ articles: state.articles }))(App);
+export default connect(state => ({ articles: Object.values(state.articles) }))(App);

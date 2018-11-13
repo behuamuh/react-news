@@ -1,7 +1,10 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 
 import rootReducer from '../redusers';
+import { generateIDMiddleware } from '../components/middlewares';
 
-const store = createStore(rootReducer);
+const enhancer = applyMiddleware(generateIDMiddleware);
+
+const store = createStore(rootReducer, enhancer);
 
 export default store;

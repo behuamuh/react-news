@@ -7,7 +7,7 @@ import toggleOpen from '../../decorators/toggleOpen';
 import CommentForm from '../CommentForm';
 import './style.css'
 
-function CommentsList({ isOpen, toggleOpen, comments = [] }) {
+function CommentsList({ isOpen, toggleOpen, comments = [], articleID }) {
   function getBody() {
     if (!isOpen) return null;
     const list =
@@ -15,8 +15,8 @@ function CommentsList({ isOpen, toggleOpen, comments = [] }) {
         <h3>No comments here.</h3>
       ) : (
         <ul>
-          {comments.map(comment => (
-            <Comment key={comment.id} comment={comment} />
+          {comments.map(id => (
+            <Comment key={id} id={id} />
           ))}
         </ul>
       );
@@ -24,7 +24,7 @@ function CommentsList({ isOpen, toggleOpen, comments = [] }) {
     return (
       <div>
         {list}
-        <CommentForm />
+        <CommentForm articleID={articleID}/>
       </div>
     );
   }
@@ -48,6 +48,7 @@ function CommentsList({ isOpen, toggleOpen, comments = [] }) {
 }
 
 CommentsList.propTypes = {
+  articleID: PropTypes.any.isRequired,
   comments: PropTypes.array,
   isOpen: PropTypes.bool.isRequired,
   toggleOpen: PropTypes.func.isRequired,

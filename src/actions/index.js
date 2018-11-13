@@ -1,4 +1,4 @@
-import { INCREMENT, DELETE_ARTICLE, SET_FILTERS } from '../const';
+import { INCREMENT, DELETE_ARTICLE, SET_FILTERS, ADD_COMMENT } from '../const';
 
 export function increment(value) {
   return {
@@ -18,5 +18,16 @@ export function setFilters(filters) {
   return {
     type: SET_FILTERS,
     payload: filters,
+  };
+}
+
+export function addComment(user, text, articleID) {
+  return {
+    type: ADD_COMMENT,
+    payload: {
+      user,
+      text,
+      articleID,
+    },
   };
 }

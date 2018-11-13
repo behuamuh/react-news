@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
+import {addComment} from '../actions'
 
-export default class CommentForm extends Component {
+class CommentForm extends Component {
   state = {
     user: '',
     text: '',
@@ -15,6 +17,11 @@ export default class CommentForm extends Component {
       [event.target.name]: event.target.value,
     });
   };
+
+  handleSubmit = () => {
+    const { user, text } = this.state;
+    this.props.addComment(user, text, this.props.articleID)
+  }
 
   render() {
     const { user, text } = this.state;
@@ -38,8 +45,13 @@ export default class CommentForm extends Component {
           className={this.validate(text, 20, 50) ? null : 'invalidInput'}
         />
         <br/>
-        <button>Add comment</button>
+        <button onClick={this.handleSubmit}>Add comment</button>
       </div>
     );
   }
 }
+
+export default connect(
+  null,
+  {addComment}
+)(CommentForm)

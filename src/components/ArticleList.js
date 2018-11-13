@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 
 import Article from './Article';
 import accordeon from '../decorators/accordeon';
-import { getFilteredArticles } from '../helpers';
+import { getFilteredArticlesSelector } from '../selectors';
 
 function ArticleList({ articles, openedId, toggleOpen }) {
-  const list = articles.map(article => (
+  const list = articles.map(id => (
     <Article
-      key={article.id}
-      article={article}
-      isOpen={article.id === openedId}
-      toggleOpen={toggleOpen(article.id)}
+      key={id}
+      id={id}
+      isOpen={id === openedId}
+      toggleOpen={toggleOpen(id)}
     />
   ));
   return <ul>{list}</ul>;
@@ -24,6 +24,6 @@ ArticleList.propTypes = {
   toggleOpen: PropTypes.func.isRequired,
 };
 
-export default connect(({ articles, filters }) => ({
-  articles: getFilteredArticles(articles, filters),
+export default connect(state => ({
+  articles: getFilteredArticlesSelector(state),
 }))(accordeon(ArticleList));

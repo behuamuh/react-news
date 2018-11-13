@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import CommentsList from '../CommentsList';
 import { deleteArticle } from '../../actions';
+import { articleSelectorFactory } from '../../selectors';
 import './style.css';
 
 function Article({ article, isOpen, toggleOpen, deleteArticle }) {
@@ -12,7 +13,7 @@ function Article({ article, isOpen, toggleOpen, deleteArticle }) {
     return isOpen ? (
       <div>
         <section>{article.text}</section>
-        <CommentsList comments={article.comments} />
+        <CommentsList comments={article.comments} articleID={article.id}/>
       </div>
     ) : null;
   }
@@ -40,6 +41,7 @@ function Article({ article, isOpen, toggleOpen, deleteArticle }) {
 }
 
 Article.propTypes = {
+  id: PropTypes.any.isRequired,
   article: PropTypes.shape({
     title: PropTypes.string.isRequired,
     text: PropTypes.string,
@@ -50,7 +52,14 @@ Article.propTypes = {
   deleteArticle: PropTypes.func,
 };
 
+const mapStateToProps = () => {
+  const articleSelector = articleSelectorFactory();
+  return (state, ownProps) => {
+    return { article: articleSelector(state, ownProps) };
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { deleteArticle }
 )(Article);
