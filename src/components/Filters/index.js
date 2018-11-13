@@ -8,35 +8,27 @@ import { connect } from 'react-redux';
 import { setFilters } from '../../actions';
 
 class Filters extends Component {
-  state = {
-    selectedOption: null,
-    from: null,
-    to: null,
-  };
-
+  
   static propTypes = {
     setFilters: PropTypes.func,
   };
 
   handleDayClick = day => {
-    const range = DateUtils.addDayToRange(day, this.state);
-    this.setState(range);
+    const range = DateUtils.addDayToRange(day, this.props);
     const { from = null, to = null } = range;
     this.props.setFilters({ filters: { from, to } });
   };
 
   handleResetClick = () => {
     this.props.setFilters({ filters: { from: null, to: null } });
-    this.setState({ from: null, to: null });
   };
 
   handleChange = selectedOption => {
     this.props.setFilters({ filters: { selectedOption } });
-    this.setState({ selectedOption });
   };
 
   render() {
-    const { from, to, selectedOption } = this.state;
+    const { from, to, selectedOption } = this.props;
     const modifiers = { start: from, end: to };
     const options = this.props.articles.map(article => ({
       value: article.id,
@@ -76,6 +68,6 @@ class Filters extends Component {
 }
 
 export default connect(
-  null,
+  ({filters}) => ({...filters}),
   { setFilters }
 )(Filters);
