@@ -9,13 +9,19 @@ const articlesMap = defaultArticles.reduce((acc, article) => {
 export default function(articles = articlesMap, action) {
   switch (action.type) {
     case DELETE_ARTICLE:
-      return articles.filter(article => article.id !== action.payload.id);
+      return Object.keys(articles).reduce((acc, id) => {
+        if (id !== action.payload.id) {
+          return { ...acc, [id]: articles[id] };
+        }
+        return acc;
+      }, {});
     case ADD_COMMENT:
       const { articleID, id } = action.payload;
-      const newArticles = {...articles};
-      newArticles[articleID] = {...articles[articleID],
-          comments: [...articles[articleID].comments, id],
-        }
+      const newArticles = { ...articles };
+      newArticles[articleID] = {
+        ...articles[articleID],
+        comments: [...articles[articleID].comments, id],
+      };
       return newArticles;
     default:
       return articles;

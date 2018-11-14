@@ -2,7 +2,7 @@ import { SET_FILTERS, DELETE_ARTICLE } from '../const';
 
 export default (
   filters = {
-    selectedOption: null,
+    selectedOption: [],
     from: null,
     to: null,
   },

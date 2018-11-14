@@ -8,18 +8,18 @@ import { deleteArticle } from '../../actions';
 import { articleSelectorFactory } from '../../selectors';
 import './style.css';
 
-function Article({ article, isOpen, toggleOpen, deleteArticle }) {
+function Article({ article, isOpen, toggleOpen, deleteArticle, id }) {
   function getBody() {
     return isOpen ? (
       <div>
         <section>{article.text}</section>
-        <CommentsList comments={article.comments} articleID={article.id}/>
+        <CommentsList comments={article.comments} articleID={id} />
       </div>
     ) : null;
   }
 
   function handleDelete() {
-    deleteArticle(article.id);
+    deleteArticle(id);
   }
 
   return (
